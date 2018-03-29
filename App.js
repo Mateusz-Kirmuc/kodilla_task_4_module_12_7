@@ -4,6 +4,10 @@ var myHeaders = {
 'X-Auth-Token': 'X-Auth-Token'
 };
 
+$.ajaxSetup({
+  headers: myHeaders
+})
+
 // OGÓLNA FUNKCJA
 function randomString() {
 	var chars = '0123456789abcdefghiklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXTZ'.split();
