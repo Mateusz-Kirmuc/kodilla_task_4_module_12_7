@@ -17,6 +17,13 @@ $.ajax({
   }
 });
 
+function setupColumns(columns) {
+  columns.forEach(function(column) {
+    var col = new Column(column.id, column.name);
+    board.createColumn(col);
+  });
+}
+
 // OGÓLNA FUNKCJA
 function randomString() {
   var chars = '0123456789abcdefghiklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXTZ'.split();
