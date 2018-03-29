@@ -1,41 +1,48 @@
 function Column(id, name) {
-	var self = this;
+  var self = this;
 
-	this.id = id;
-	this.name = name || 'No name given';
-	this.element = createColumn();
+  this.id = id;
+  this.name = name || 'No name given';
+  this.element = createColumn();
 
-	function createColumn() {
-		// TWORZENIE NOWYCH WĘZŁÓW
-		var column = $('<div class="column"></div>');
-		var columnTitle = $('<h2 class="column-title">' + self.name + '</h2>');
-		var columnCardList = $('<ul class="card-list"></ul>');
-		var columnDelete = $('<button class="btn-delete">x</button>');
-		var columnAddCard = $('<button class="column-add-card">Dodaj kartę</button>');
+  function createColumn() {
+    // TWORZENIE NOWYCH WĘZŁÓW
+    var column = $('<div class="column"></div>');
+    var columnTitle = $('<h2 class="column-title">' + self.name + '</h2>');
+    var columnCardList = $('<ul class="card-list"></ul>');
+    var columnDelete = $('<button class="btn-delete">x</button>');
+    var columnAddCard = $('<button class="column-add-card">Dodaj kartę</button>');
 
-		// PODPINANIE ODPOWIEDNICH ZDARZEŃ POD WĘZŁY
-		columnDelete.click(function() {
-			self.deleteColumn();
-		});
+    // PODPINANIE ODPOWIEDNICH ZDARZEŃ POD WĘZŁY
+    columnDelete.click(function() {
+      self.deleteColumn();
+    });
 
-		columnAddCard.click(function(event) {
-			event.preventDefault();
-			self.createCard(new Card(prompt("Wpisz nazwę karty")));
-		});
+    columnAddCard.click(function(event) {
+      event.preventDefault();
+      self.createCard(new Card(prompt("Wpisz nazwę karty")));
+    });
 
-			// KONSTRUOWANIE ELEMENTU KOLUMNY
-		column.append(columnTitle)
-			.append(columnDelete)
-			.append(columnAddCard)
-			.append(columnCardList);
-			return column;
-		}
-	}
+    // KONSTRUOWANIE ELEMENTU KOLUMNY
+    column.append(columnTitle)
+      .append(columnDelete)
+      .append(columnAddCard)
+      .append(columnCardList);
+    return column;
+  }
+}
 Column.prototype = {
-	createCard: function(card) {
-	  this.element.children('ul').append(card.element);
-	},
-	deleteColumn: function() {
-	  this.element.remove();
-	}
-};
+    createCard: function(card) {
+      this.element.children('ul').append(card.element);
+    },
+    deleteColumn: function() {
+        var self = this;
+        $.ajax({
+            url: baseUrl + '/column/' + self.id,
+            method: 'DELETE',
+            success: function(response) {
+              self.element.remove();
+            }
+          })
+        }
+      }
