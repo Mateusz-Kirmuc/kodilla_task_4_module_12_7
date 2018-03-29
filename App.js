@@ -24,17 +24,6 @@ function setupColumns(columns) {
   });
 }
 
-// OGÓLNA FUNKCJA
-function randomString() {
-  var chars = '0123456789abcdefghiklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXTZ'.split();
-  var str = '',
-    i;
-  for (i = 0; i < 10; i++) {
-    str += chars[Math.floor(Math.random() * chars.length)];
-  }
-  return str;
-}
-
 // TWORZENIE NOWYCH EGZEMPLARZY KOLUMN
 var todoColumn = new Column('Do zrobienia');
 var doingColumn = new Column('W trakcie');
