@@ -19,8 +19,9 @@ function Column(id, name) {
     });
 
     columnAddCard.click(function(event) {
+      var cardName = prompt("Wpisz nazwę karty");
       event.preventDefault();
-      self.createCard(new Card(prompt("Wpisz nazwę karty")));
+      self.createCard(new Card(cardName));
     });
 
     // KONSTRUOWANIE ELEMENTU KOLUMNY
